@@ -5,6 +5,7 @@ require "./App/DB/Database.php";
 
 class Usuario{
     
+    public int $id_usuario;
     public string $nome;
     public string $cpf;
     public string $email;
