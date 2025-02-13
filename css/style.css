@@ -21,8 +21,9 @@ body{
     justify-content: center;
     background-color: rgba(255, 255, 255, 0.293);
     
-    width: 30%;
+    width: auto;
     /* height: 30%; */
+    padding: 2vh;
     
     gap: 15px;
     border-radius: 5px;
