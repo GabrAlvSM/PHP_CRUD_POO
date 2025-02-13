@@ -1,10 +1,20 @@
 <?php
     require './classes/Usuario.php';
+    // require_once './listar.php';
     
-    $usuario = new Usuario();
+    $user = new Usuario();
+        
+    // // READ
 
-    // ACAO LISTAR POR ID
-    // $usuarios = $user->buscar_id_usu();
+    // $busca = $user->buscar_id_usu(10);
+    // print_r($busca);
+    // $busca->nome = "Alvin";
+    // $busca->cpf = "33333333333";
+    // $busca->email = "alvin@email.com";
+    // $busca->senha = "padrao123";
+
+    // print_r($busca);
+
 ?>
 
 <!DOCTYPE html>
@@ -13,43 +23,58 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Editar e Atualizar Usuário</title>
+
+    <link rel="stylesheet" href="./css/style.css">
 </head>
 <body>
     <div class="nucleo">
         <p class="titulo">Editar e Atualizar Usuário</p>
-        
-        <?php 
-            if(isset($_GET['id_usuario'])){
-                $id_usuario = $_GET['id_usuario'];
-                
-                // $query = ('SELECT * FROM usuario WHERE id_usuario=:iu LIMIT 1');
-                // $statement = $pdo->prepare($query);
-                // $data = [':iu' => $id_usuario];
-                // $statement->execute($data);
-                
-                // $result = $statement->fetch(PDO::FETCH_ASSOC);
+
+        <?php
+            // print_r($_GET['id_usuario']);
+
+            if (isset($_GET['id_usuario'])) {
+                $id_usuario = addslashes($_GET['id_usuario']);
+                // $busca = $user->buscar_id_usu($id_usuario);
+                $busca = $user->buscar($id_usuario);
+
+                print_r($busca[1]);
+
+                if (!$busca) {
+                    die('Usuario não encontrado.');
+                }
             }
+            else{
+                die('Usuario não encontrado.');
+            }
+            
+        ?>
+
+        <form action="editar.php?id_produto=<?php echo $id_usuario?>" method="POST">
+        
+            <?php
+                // echo "ID do usuário: ".$busca->id_usuario;
             ?>
-        
-        <form action="usuario.php" method="POST">
-        
-        <label for="id_usuario">Id_usuario:</label>
-        <input type="text" name="id_usuario" value="<?= $result['id_usuario']; ?>" required><br><br>
 
-        <label for="nome">Nome:</label>
-        <input type="text" id="nome" name="nome" value="<?= $result['nome']; ?>" required><br><br>
+            <label for="nome">Nome:</label>
+            <input type="text" id="nome" name="nome" value="" required><br><br>
 
-        <label for="cpf">CPF:</label>
-        <input type="text" id="cpf" name="cpf" value="<?= $result['cpf']; ?>" required><br><br>
+            <label for="cpf">CPF:</label>
+            <input type="text" id="cpf" name="cpf" value="" required><br><br>
 
-        <label for="email">Email:</label>
-        <input type="email" id="email" name="email" value="<?= $result['email']; ?>" required><br><br>
-        
-        <label for="senha">Senha:</label>
-        <input type="password" name="senha" value="<?= $result['senha']; ?>" placeholder="Digite sua senha.">
+            <label for="email">Email:</label>
+            <input type="email" id="email" name="email" value="" required><br><br>
+            
+            <label for="senha">Senha:</label>
+            <input type="password" name="senha" value="" placeholder="Digite sua senha.">
 
-        <button type="submit">Salvar alterações</button>
+            <label for="confsenha">Senha:</label>
+            <input type="password" name="confsenha" value="" placeholder="Redigite sua senha.">
+
+            <button type="submit">Salvar alterações</button>
+            
             <a href="./listar.php">VOLTAR</a>
+            
         </form>
 
         <?php
@@ -64,49 +89,34 @@
 
             if(!empty($nome) && !empty($cpf) && !empty($email) && !empty($senha) && !empty($confsenha))
             {
-                // if($usuario->msgErro == ""){
-                if(){
-                    
-                    if($senha == $confsenha){
+                if($senha == $confsenha){
 
-                        if($usuario->cadastrar($nome, $telefone, $email, $senha)){                    
-                            ?> 
-                            <!-- Inicio da area do html -->
-                            <div id="msg-sucesso">
-                                Cadastrado com sucesso;
-                                Clique <a href="index.php">aqui</a>
-                                para logar.
-                            </div>
-                            <!-- Fim da area do html -->
-                            <?php
-                        }
-                        else{
-                            ?>
-                            <!-- Inicio da area do html -->
-                            <div id="msg-sucesso">
-                                Email já cadastrado
-                            </div>
-                            <!-- Fim da area do html -->                        
-                            <?php
-                        }
+                    if($usuario->cadastrar($nome, $telefone, $email, $senha)){                    
+                        ?> 
+                        <!-- Inicio da area do html -->
+                        <div id="msg-sucesso">
+                            Cadastrado com sucesso;
+                            Clique <a href="index.php">aqui</a>
+                            para logar.
+                        </div>
+                        <!-- Fim da area do html -->
+                        <?php
                     }
                     else{
                         ?>
+                        <!-- Inicio da area do html -->
                         <div id="msg-sucesso">
-                            Senha e Confirma senha não conferem.
+                            Email já cadastrado
                         </div>
+                        <!-- Fim da area do html -->                        
                         <?php
                     }
                 }
                 else{
                     ?>
-                    <!-- Inicio da area do html -->
-                        <div id="msg-sucesso">
-                            <?php
-                                echo"Erro: ".$usuario->msgErro;
-                            ?>
-                        </div>
-                    <!-- Fim da area do html -->                        
+                    <div id="msg-sucesso">
+                        Senha e Confirma senha não conferem.
+                    </div>
                     <?php
                 }
             }

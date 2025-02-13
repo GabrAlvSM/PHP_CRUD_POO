@@ -1,7 +1,7 @@
 <?php
 
-// require '../App/DB/Database.php';
-require "./App/DB/Database.php";
+require '../App/DB/Database.php';
+// require "./App/DB/Database.php";
 
 class Usuario{
     
@@ -87,5 +87,15 @@ class Usuario{
 // else{
 //     "ERRO! Falha no cadastro do usuário";
 // }
+
+$user = new Usuario();
+$busca = $user->buscar_id_usu(10);
+print_r($busca);
+// $busca->nome = "Alvin";
+// $busca->cpf = "33333333333";
+// $busca->email = "alvin@email.com";
+// $busca->senha = "padrao123";
+
+// print_r($busca);
 
 ?>

@@ -58,6 +58,8 @@ class Database{
 
         $query = "SELECT $fields FROM $this->table $where $order $limit";
 
+        // return $this->execute($query)->fetch(PDO::FETCH_ASSOC);
+
         return $this->execute($query)->fetch(PDO::FETCH_ASSOC);
     }
 

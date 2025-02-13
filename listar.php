@@ -48,9 +48,7 @@ if(isset($_POST['deletar'])){
                                 echo '<td>'. $usuario->email .'</td>';
                                 echo '<td>';
                                     ?>
-                                    <button class="botao editar">
-                                        <a href="./editar.php?id_usuario<?= $usuario->id_usuario;?>" style='text-decoration: none; color: #000000; height: 100%; width: 100%;'>Editar</a>
-                                    </button>
+                                    <a class="botao editar" href="editar.php?id_usuario=<?=htmlspecialchars($usuario->id_usuario); ?>" style='text-decoration: none; color: #000000; height: 100%; width: 100%;'>Editar</a>
                                     <button class="botao deletar" type="submit" name="deletar" value="'.$usuario->id_usuario.'" onclick="javascript:return confirm('Confirme para excluir este usuário.')" style="cursor:pointer;">Deletar</button>
                                     <?php
                                 echo '</td>';
