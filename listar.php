@@ -5,7 +5,6 @@ $user = new Usuario();
 
 // ACAO LISTAR
 $usuarios = $user->buscar();
-
 // ACAO DELETAR
 if(isset($_POST['deletar'])){
     $delete = $_POST['deletar'];
@@ -46,12 +45,12 @@ if(isset($_POST['deletar'])){
                                 echo '<td>'. $usuario->nome .'</td>';
                                 echo '<td>'. $usuario->cpf .'</td>';
                                 echo '<td>'. $usuario->email .'</td>';
-                                echo '<td>';
-                                    ?>
-                                    <a class="botao editar" href="editar.php?id_usuario=<?=htmlspecialchars($usuario->id_usuario); ?>" style='text-decoration: none; color: #000000; height: 100%; width: 100%;'>Editar</a>
-                                    <button class="botao deletar" type="submit" name="deletar" value="'.$usuario->id_usuario.'" onclick="javascript:return confirm('Confirme para excluir este usuário.')" style="cursor:pointer;">Deletar</button>
-                                    <?php
-                                echo '</td>';
+                                ?>
+                                <td class="botoes-tabela">
+                                    <a class="botao editar" href="editar.php?id_usuario=<?=htmlspecialchars($usuario->id_usuario); ?>">Editar</a>
+                                    <button class="botao deletar" type="submit" name="deletar" value="<?=$usuario->id_usuario?>" onclick="javascript:return confirm('Confirme para excluir este usuário.')">Deletar</button>
+                                </td>
+                                <?php
                             echo '</tr>';
                         };
                     ?>

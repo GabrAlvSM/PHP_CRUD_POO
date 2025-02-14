@@ -1,7 +1,7 @@
 <?php
 
-require '../App/DB/Database.php';
-// require "./App/DB/Database.php";
+// require '../App/DB/Database.php';
+require "./App/DB/Database.php";
 
 class Usuario{
     
@@ -14,7 +14,7 @@ class Usuario{
     // private function __construct(){
     // }
     
-    public function cadastrar(){
+    public function cadastrar(): bool{
         $db = new Database("usuario");
 
         $db->insert(
@@ -33,7 +33,7 @@ class Usuario{
     }
 
     public function buscar_id_usu($id_usuario){
-        return (new Database("usuario"))->select("id_usuario =".$id_usuario)->fetchObject(self::class);
+        return (new Database("usuario"))->list_users("id_usuario =".$id_usuario)->fetch();
     }
 
     public function logar($email,$senha){
@@ -88,9 +88,9 @@ class Usuario{
 //     "ERRO! Falha no cadastro do usuário";
 // }
 
-$user = new Usuario();
-$busca = $user->buscar_id_usu(10);
-print_r($busca);
+// $user = new Usuario();
+// $busca = $user->buscar_id_usu(10);
+// print_r($busca);
 // $busca->nome = "Alvin";
 // $busca->cpf = "33333333333";
 // $busca->email = "alvin@email.com";

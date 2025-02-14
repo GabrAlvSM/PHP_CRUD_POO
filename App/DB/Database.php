@@ -17,7 +17,7 @@ class Database{
         try{
             $this->conn = new PDO("mysql:host=$this->local; dbname=$this->banco;", $this->user, $this->password);
             $this->conn->setAttribute(PDO::ATTR_ERRMODE,PDO::ERRMODE_EXCEPTION);
-            echo "Conectado!"; //DEBUG
+            echo "\n Conectado!"; //DEBUG
         }
         catch(PDOException $erro){
             die("\nFalha na conecção! (fn conn) <br>". $erro->getMessage());

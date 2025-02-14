@@ -58,8 +58,10 @@ if(isset($_POST["cadastrar"])) {
 
     $res = $objUser->cadastrar();
     if ($res) {
+        echo "<br>";
         echo "<script> alert('Cadastrado com sucesso!') </script>";
     }else{
+        echo "<br>";
         echo "<script> alert('Erro no cadastro!') </script>";
     }
 }
