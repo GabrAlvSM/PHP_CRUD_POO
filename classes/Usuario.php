@@ -8,6 +8,7 @@ class Usuario{
     public int $id_usuario;
     public string $nome;
     public string $cpf;
+    public string $foto;
     public string $email;
     public string $senha;
     
@@ -21,6 +22,7 @@ class Usuario{
             [
                 "nome"=> $this->nome,
                 "cpf"=> $this->cpf,
+                "foto"=> $this->foto,
                 "email"=> $this->email,
                 "senha"=> $this->senha
             ]

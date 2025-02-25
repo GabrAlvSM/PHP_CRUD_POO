@@ -12,6 +12,8 @@ if(isset($_POST['deletar'])){
     header("Location: listar.php");
     exit;
 }
+
+
 ?>
 
 <!DOCTYPE html>
@@ -31,6 +33,7 @@ if(isset($_POST['deletar'])){
                 <thead>
                     <tr>
                         <th>ID</th>
+                        <th>Foto</th>
                         <th>Nome</th>
                         <th>CPF</th>
                         <th>Email</th>
@@ -41,7 +44,9 @@ if(isset($_POST['deletar'])){
                     <?php 
                         foreach($usuarios as $usuario){
                             echo '<tr>';
+                            // imagem do usuario
                                 echo '<td>'. $usuario->id_usuario .'</td>';
+                                ?> <td class="foto_user"> <img src="<?=$usuario->foto?>"> </td><?php
                                 echo '<td>'. $usuario->nome .'</td>';
                                 echo '<td>'. $usuario->cpf .'</td>';
                                 echo '<td>'. $usuario->email .'</td>';

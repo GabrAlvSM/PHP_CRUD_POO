@@ -49,6 +49,9 @@
             <label for="cpf">CPF:</label>
             <input type="text" id="cpf" name="cpf" value="<?=$busca["cpf"]?>" required><br><br>
 
+            <!-- <label for="foto">Foto:</label>
+            <input type="file" id="foto" name="foto" value="<?=$busca["foto"]?>" required><br><br> -->
+
             <label for="email">Email:</label>
             <input type="email" id="email" name="email" value="<?=$busca["email"]?>" required><br><br>
             
