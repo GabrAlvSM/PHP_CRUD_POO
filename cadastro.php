@@ -29,7 +29,7 @@ require './classes/Usuario.php';
 
             <div class="separador">
             <label for="foto">Foto</label>
-            <input type="file" name="foto" id="foto" placeholder="">
+            <input type="file" name="foto" id="foto">
             </div>
 
             <div class="separador">
@@ -60,15 +60,16 @@ if(isset($_POST["cadastrar"])) {
     $email = $_POST["email"];
     $senha = $_POST["senha"];
     
-    if ($arquivo['error']) die("Falha ao enviar arquivo");
-
-    $pasta = '/var/www/AulaPHP/Crud_PHP_POO_MVC/uploads/fotos/';
+    // if ($arquivo['error']) die("Falha ao enviar arquivo");
+    
+    $pasta = './uploads/fotos/';
     $nome_arquivo = $arquivo['name'];
     $novo_nome = uniqid();
     $extensao = strtolower(pathinfo($nome_arquivo, PATHINFO_EXTENSION));
     if ($extensao != "png" && $extensao != "jpg") die("Arquivo inválido");    
-
+    
     $path_foto = $pasta . $novo_nome . "." . $extensao;
+    echo $path_foto;
 
     $foto = move_uploaded_file($arquivo['tmp_name'], $path_foto);
     // echo $arquivo['tmp_name'];
