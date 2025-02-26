@@ -64,6 +64,7 @@ class Usuario{
             [
                 "nome"=> $this->nome,
                 "cpf"=> $this->cpf,
+                "foto"=> $this->foto,
                 "email"=> $this->email,
                 "senha"=> $this->senha
             ]

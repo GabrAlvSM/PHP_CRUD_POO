@@ -46,7 +46,7 @@ if(isset($_POST['deletar'])){
                             echo '<tr>';
                             // imagem do usuario
                                 echo '<td>'. $usuario->id_usuario .'</td>';
-                                ?> <td class="foto_user"> <img src="<?=$usuario->foto?>"> </td><?php
+                                ?> <td class="foto_col"> <img class="foto_user" src="<?=$usuario->foto?>"> </td><?php
                                 echo '<td>'. $usuario->nome .'</td>';
                                 echo '<td>'. $usuario->cpf .'</td>';
                                 echo '<td>'. $usuario->email .'</td>';

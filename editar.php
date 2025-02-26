@@ -1,4 +1,6 @@
 <?php
+    ini_set('upload_tmp_dir',"/var/www");
+
     require './classes/Usuario.php';
     
     $user = new Usuario();        
@@ -37,7 +39,7 @@
     <div class="nucleo">
         <p class="titulo">Editar e Atualizar Usuário</p>
 
-        <form method="POST">
+        <form method="POST" enctype="multipart/form-data">
         
             <?php
                 echo "ID do usuário: ".$busca["id_usuario"];
@@ -49,8 +51,11 @@
             <label for="cpf">CPF:</label>
             <input type="text" id="cpf" name="cpf" value="<?=$busca["cpf"]?>" required><br><br>
 
-            <!-- <label for="foto">Foto:</label>
-            <input type="file" id="foto" name="foto" value="<?=$busca["foto"]?>" required><br><br> -->
+            <label for="foto">Foto:</label>
+            <div style="display: flex; flex-direction: row; align-items: center; gap: 10px;">
+                <img class="foto_user" src="<?=$busca["foto"]?>">
+                <input type="file" id="foto" name="foto" value="<?=$busca["foto"]?>"><br><br>
+            </div>
 
             <label for="email">Email:</label>
             <input type="email" id="email" name="email" value="<?=$busca["email"]?>" required><br><br>
@@ -61,7 +66,7 @@
             <label for="confsenha">Confirmar Senha:</label>
             <input type="password" name="confsenha" value="<?=$busca["senha"]?>" placeholder="Redigite sua senha.">
 
-            <div class="botoes">
+            <div class="botoes" enctype="multipart/form-data">
                 <button class="botao confirm" type="submit" name="cadastrar">Salvar</button>    
                 <a class="botao cancel" type="reset" href="./listar.php">Cancelar</a>
             </div>
@@ -74,6 +79,7 @@
         {
             $nome = $_POST["nome"];
             $cpf = $_POST["cpf"];
+            $arquivo = $_FILES["foto"];
             $email = $_POST["email"];
             $senha = $_POST["senha"];
             $confsenha = addslashes($_POST["confsenha"]);
@@ -81,13 +87,38 @@
             if(!empty($nome) && !empty($cpf) && !empty($email) && !empty($senha) && !empty($confsenha))
             {
                 if($senha == $confsenha){
+                                        
+                    if ($arquivo != null && $arquivo['error']) {
+                        die("Falha ao enviar arquivo. err_id: ". $arquivo['error']);
+                    }
+                    elseif($arquivo == null){
+                        $arquivo = '';
+                    }
+                    else{
+                        $pasta = './uploads/fotos/';
                     
+                        $nome_arquivo = $arquivo['name'];
+                        $novo_nome = uniqid();
+                        $extensao = strtolower(pathinfo($nome_arquivo, PATHINFO_EXTENSION));
+                        if ($extensao != "png" && $extensao != "jpg" && $extensao != "jpeg") die("Arquivo inválido");    
+                        
+                        $path_foto = $pasta . $novo_nome . "." . $extensao;
+                
+                        $foto = move_uploaded_file($arquivo['tmp_name'], $path_foto);
+                        if ($foto){
+                            echo "<br>Arquivo enviado com sucesso";
+                        }else{
+                            echo "<br>Falha ao salvar arquivo";
+                        }
+                    }
+
                     $objUser = $user;
                     $objUser->nome = $nome;
                     $objUser->cpf = $cpf;
+                    $objUser->foto = $path_foto;
                     $objUser->email = $email;
                     $objUser->senha = $senha;
-                    
+
                     $res = $objUser->update($_GET['id_usuario']);
                     if($res){                    
                         echo  "<script>alert('Editado com sucesso!');</script>";

@@ -1,4 +1,5 @@
 <?php
+ini_set('upload_tmp_dir',"/var/www");
 
 require './classes/Usuario.php';
 
@@ -28,8 +29,8 @@ require './classes/Usuario.php';
             </div>
 
             <div class="separador">
-            <label for="foto">Foto</label>
-            <input type="file" name="foto" id="foto">
+                <label for="foto">Foto</label>
+                <input type="file" name="foto" id="foto">
             </div>
 
             <div class="separador">
@@ -42,7 +43,7 @@ require './classes/Usuario.php';
                 <input type="password" name="senha" id="senha" placeholder="Senha">
             </div>
 
-            <div class="area-botoes" method="POST">
+            <div class="area-botoes" method="POST" enctype="multipart/form-data">
                 <button class="botao confirm" type="submit" name="cadastrar">Cadastrar</button>
                 <button class="botao cancel" type="reset" onclick="location.href='./index.php';">Voltar</button>
             </div>
@@ -53,6 +54,7 @@ require './classes/Usuario.php';
 </html>
 
 <?php
+
 if(isset($_POST["cadastrar"])) {
     $nome = $_POST["nome"];
     $cpf = $_POST["cpf"];
@@ -60,50 +62,66 @@ if(isset($_POST["cadastrar"])) {
     $email = $_POST["email"];
     $senha = $_POST["senha"];
     
-    // if ($arquivo['error']) die("Falha ao enviar arquivo");
-    
-    $pasta = './uploads/fotos/';
-    $nome_arquivo = $arquivo['name'];
-    $novo_nome = uniqid();
-    $extensao = strtolower(pathinfo($nome_arquivo, PATHINFO_EXTENSION));
-    if ($extensao != "png" && $extensao != "jpg") die("Arquivo inválido");    
-    
-    $path_foto = $pasta . $novo_nome . "." . $extensao;
-    echo $path_foto;
-
-    $foto = move_uploaded_file($arquivo['tmp_name'], $path_foto);
-    // echo $arquivo['tmp_name'];
-    
-    
-    // $objUser = new Usuario();
-    // $objUser->nome = $nome;
-    // $objUser->cpf = $cpf;
-    // $objUser->email = $email;
-    // $objUser->senha = $senha;
-    
-    // $res = $objUser->cadastrar();
-    // if ($res) {
-    //     echo "<br>";
-    //     echo "<script> alert('Cadastrado com sucesso!') </script>";
-    // }else{
-    //         echo "<br>";
-    //         echo "<script> alert('Erro no cadastro!') </script>";
-    //     }
+    // //TRATAMENTO DE ARQUIVOS
+    // print_r($arquivo);
+    if ($arquivo != null && $arquivo['error']) {
+        die("Falha ao enviar arquivo. err_id: ". $arquivo['error']);
+    }
+    elseif($arquivo == null){
+        $arquivo = '';
     }
     else{
-        echo "Dados não recebidos!";
+        $pasta = './uploads/fotos/';
+    
+        $nome_arquivo = $arquivo['name'];
+        $novo_nome = uniqid();
+        $extensao = strtolower(pathinfo($nome_arquivo, PATHINFO_EXTENSION));
+        if ($extensao != "png" && $extensao != "jpg" && $extensao != "jpeg") die("Arquivo inválido");    
+        
+        $path_foto = $pasta . $novo_nome . "." . $extensao;
+            
+        // $tamanho = $arquivo['size'];
+        // if ($tamanho>500){
+            //     echo("Tamanho inválido!");
+            // }
+        // print_r($_FILES);
+        // echo "Nome antigo =". $nome_arquivo;
+        // echo "novo nome =". $novo_nome;
+
+        $foto = move_uploaded_file($arquivo['tmp_name'], $path_foto);
+        if ($foto){
+            echo "<br>Arquivo enviado com sucesso";
+        }else{
+            echo "<br>Falha ao salvar arquivo";
+        }
+    }
+    
+    
+    $objUser = new Usuario();
+
+    $objUser->nome = $nome;
+    $objUser->cpf = $cpf;
+    $objUser->foto = $path_foto;
+    $objUser->email = $email;
+    $objUser->senha = $senha;
+    
+    $res = $objUser->cadastrar();
+
+    if ($res) {
+        echo "<br>";
+        echo "<script> alert('Cadastrado com sucesso!') </script>";
+    }else{
+            echo "<br>";
+            echo "<script> alert('Erro no cadastro!') </script>";
     }
 
+}
+else{
+    echo "Dados não recebidos!";
+}
 
 
 
-    // //TRATAMENTO DE ARQUIVOS
-    // echo $nome_arquivo . "<br>";
-    // $tamanho = $arquivo['size'];
-    // if ($tamanho>500){
-        //     echo("Tamanho inválido!");
-        // }
-    // print_r($_FILES);
-    // echo "Nome antigo =". $nome_arquivo;
-    // echo "novo nome =". $novo_nome;
+
+
 ?>

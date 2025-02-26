@@ -5,14 +5,15 @@
 
 body{
     display: flex;
-    flex-direction: column-reverse;
+    flex-direction: column;
     align-items: center;
     justify-content: center;
     height: 100vh;
     width: 100vw;
     color: rgb(0, 222, 19);
     background-color: rgba(0, 0, 0, 1);
-    
+    gap: 5px;
+    text-wrap: nowrap;
 }
 
 .nucleo{
@@ -141,10 +142,12 @@ th{
 tr, td{
     background-color: #000000;
 }
-
+.foto_col{
+    max-width: 100px;
+}
 .foto_user{
-    max-height: 50px;
-    max-width: 50px;
+    max-height: 100px;
+    max-width: 100px;
 }
 
 .botoes-tabela{
