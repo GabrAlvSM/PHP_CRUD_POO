@@ -21,7 +21,7 @@ if(isset($_POST['deletar'])){
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login</title>
+    <title>Usuarios</title>
 
     <link rel="stylesheet" href="./css/style.css">
 </head>
@@ -35,9 +35,10 @@ if(isset($_POST['deletar'])){
                         <th>ID</th>
                         <th>Foto</th>
                         <th>Nome</th>
-                        <th>CPF</th>
-                        <th>Email</th>
-                        <th>Opções</th>
+                        <th>Descricao</th>
+                        <th>Categoria</th>
+                        <th>Estoque</th>
+                        <th>Opções</th></th>
                     </tr>
                 </thead>
                 <tbody>

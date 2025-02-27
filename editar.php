@@ -1,5 +1,5 @@
 <?php
-    ini_set('upload_tmp_dir',"/var/www");
+    // ini_set('upload_tmp_dir',"/var/www");
 
     require './classes/Usuario.php';
     

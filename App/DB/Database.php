@@ -9,8 +9,8 @@ class Database{
     private $table;
     
     function __construct($table = null) {
-        $this->conecta();
         $this->table = $table;
+        $this->conecta();
     }
 
     public function conecta() {

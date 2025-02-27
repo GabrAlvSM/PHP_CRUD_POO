@@ -1,8 +1,7 @@
 <?php
-ini_set('upload_tmp_dir',"/var/www");
+// ini_set('upload_tmp_dir',"/var/www/AulaPHP/Crud_PHP_POO_MVC/uploads/");
 
 require './classes/Usuario.php';
-
 
 ?>
 <!DOCTYPE html>
