@@ -1,10 +1,10 @@
 <?php
 
-require './classes/Produto.php';
-$prod = new Produto();
+require './classes/Usuario.php';
+$prod = new Usuario();
 
 // ACAO LISTAR
-$produtos = $prod->listar_prod();
+$produtos = $prod->buscar();
 // ACAO DELETAR
 if(isset($_POST['deletar'])){
     $delete = $_POST['deletar'];
@@ -21,7 +21,7 @@ if(isset($_POST['deletar'])){
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Produtos</title>
+    <title>Usuarios</title>
 
     <link rel="stylesheet" href="./css/style.css">
 </head>
