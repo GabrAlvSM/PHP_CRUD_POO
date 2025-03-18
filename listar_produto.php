@@ -1,10 +1,10 @@
 <?php
 
-require './classes/Usuario.php';
-$prod = new Usuario();
+require './classes/Produto.php';
+$user = new Produto();
 
 // ACAO LISTAR
-$produtos = $prod->buscar();
+$produtos = $prod->listar_prod();
 // ACAO DELETAR
 if(isset($_POST['deletar'])){
     $delete = $_POST['deletar'];
@@ -35,25 +35,27 @@ if(isset($_POST['deletar'])){
                         <th>ID</th>
                         <th>Foto</th>
                         <th>Nome</th>
-                        <th>CPF</th>
-                        <th>Email</th>
-                        <th>Opções</th>
+                        <th>Descricao</th>
+                        <th>Categoria</th>
+                        <th>Estoque</th>
+                        <th>Opções</th></th>
                     </tr>
                 </thead>
                 <tbody>
                     <?php 
-                        foreach($usuarios as $usuario){
+                        foreach($produtos as $produto){
                             echo '<tr>';
                             // imagem do usuario
-                                echo '<td>'. $usuario->id_usuario .'</td>';
-                                ?> <td class="foto_col"> <img class="foto_user" src="<?=$usuario->foto?>"> </td><?php
-                                echo '<td>'. $usuario->nome .'</td>';
-                                echo '<td>'. $usuario->cpf .'</td>';
-                                echo '<td>'. $usuario->email .'</td>';
+                                echo '<td>'. $produto->id_prod .'</td>';
+                                ?> <td class="foto_col"> <img class="foto_user" src="<?=$produto->foto?>"> </td><?php
+                                echo '<td>'. $produto->nome .'</td>';
+                                echo '<td>'. $produto->descricao .'</td>';
+                                echo '<td>'. $produto->categoria .'</td>';
+                                echo '<td>'. $produto->estoque .'</td>';
                                 ?>
                                 <td class="botoes-tabela">
-                                    <a class="botao editar" href="editar.php?id_usuario=<?=htmlspecialchars($usuario->id_usuario); ?>">Editar</a>
-                                    <button class="botao deletar" type="submit" name="deletar" value="<?=$usuario->id_usuario?>" onclick="javascript:return confirm('Confirme para excluir este usuário.')">Deletar</button>
+                                    <a class="botao editar" href="editar.php?id_prod=<?=htmlspecialchars($produto->id_prod); ?>">Editar</a>
+                                    <button class="botao deletar" type="submit" name="deletar" value="<?=$produto->id_prod?>" onclick="javascript:return confirm('Confirme para excluir este usuário.')">Deletar</button>
                                 </td>
                                 <?php
                             echo '</tr>';

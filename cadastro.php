@@ -12,11 +12,12 @@ require './classes/Usuario.php';
     <title>Cadastro de usuario</title>
 
     <link rel="stylesheet" href="./css/style.css">
+    <script src="./js/action.js" defer></script>
 </head>
 <body>
     <div class="nucleo">
         <div class="titulo">Cadastro</div>
-        <form method="POST" enctype="multipart/form-data">
+        <form method="POST" enctype="multipart/form-data" id="myform">
             <div class="separador">
                 <label for="nome">Nome</label>
                 <input type="text" name="nome" id="nome" placeholder="Nome do usuario">
@@ -43,7 +44,7 @@ require './classes/Usuario.php';
             </div>
 
             <div class="area-botoes" method="POST" enctype="multipart/form-data">
-                <button class="botao confirm" type="submit" name="cadastrar">Cadastrar</button>
+                <button class="botao confirm" type="submit" name="cadastrar" id="cadastrar" >Cadastrar</button>
                 <button class="botao cancel" type="reset" onclick="location.href='./index.php';">Voltar</button>
             </div>
         </form>

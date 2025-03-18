@@ -45,7 +45,7 @@ if(isset($_POST['email']))
         {
             if($busca->logar($email, $senha))
             {
-                header("location: ./listar.php");
+                header("location: ./listar_usuario.php");
             }else{
                 echo "<script> alert('Dados incorretos!') </script>";
             }
