@@ -10,6 +10,7 @@ const senha_usu = document.getElementById("senha");
 
 
 cadastrar.addEventListener("mouseover", function(){
+    console.log(formulario.nome.value);
     console.log(nome_usu.value);
     console.log(cpf_usu.value);
     console.log(foto_usu.value);
